@@ -45,4 +45,4 @@ new FQC_QR_Code();
 // }
 // } -->
 
-<?php eccho "test"; ?>
+//test
