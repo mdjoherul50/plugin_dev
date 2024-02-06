@@ -24,10 +24,19 @@
     $content = $content . $custom_content;
      return $content ;
    }
-// chnage the title
-add_filter('the_title','chnage_title');
-function chnage_title($title){
-  $title = $title . " <h1> Bangladesh";
+// chnage the tit
+
+add_filter('excerpt_length','change_excerpt_length');
+function change_excerpt_length($length){
+  return 20;
+}
+add_filter('the_title','change_title' );
+function change_title($title){
+  if(is_admin()){
+    return $title;
+  }
+  $custom_title = ' <h2> This is my custom title</h2>';
+  $title .= $custom_title;
   return $title;
 }
 //html5
