@@ -16,13 +16,16 @@
  */
 
 
-class FQC_QR_Code {
+class AQC_QR_Code {
 
+	private $color = 'FF00FF';
+	private $size = 100;
 	public function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
 	}
 	public function init() {
 		add_filter( 'the_content', array( $this, 'add_qr_code' ),999 );
+		$this->color = apply_filters( 'aqc_qr_code_color', $this->color );
 		
 	}
 	public function add_qr_code( $content ) {
@@ -35,7 +38,7 @@ class FQC_QR_Code {
         $custom_content = '<div style="border: 1px solid #ddd; padding: 10px; margin: 20px 0;">';
         // $custom_content .= '<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=' . $current_link . '" alt="'.$title.'" />';
         // $custom_content .="<img src='https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl={$current_link}' alt='{$title}' />";
-        $custom_content .="<img src='https://api.qrserver.com/v1/create-qr-code/?color=ff0000&size=150x150&data={$current_link}' alt='{$title}' />";
+        $custom_content .="<img src='https://api.qrserver.com/v1/create-qr-code/?color={$this->color}&size={$this->size}x{$this->size}&data={$current_link}' alt='{$title}' />";
         $custom_content .= '</div>';
         
         $content .= $custom_content;
@@ -43,7 +46,7 @@ class FQC_QR_Code {
 	}
 	
 }
-new FQC_QR_Code();
+new AQC_QR_Code();
 
 
 // <!-- class AQC_Qr_Code{
@@ -57,4 +60,3 @@ new FQC_QR_Code();
 // }
 // } -->
 
-//test
