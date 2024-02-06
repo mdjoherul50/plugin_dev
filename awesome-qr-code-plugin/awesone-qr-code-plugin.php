@@ -48,6 +48,17 @@ class AQC_QR_Code {
 }
 new AQC_QR_Code();
 
+//this code have to add theme function
+
+// add_filter('aqc_qr_code_color', 'change_qr_code_color');
+
+// function change_qr_code_color($color){
+	
+// 	return 'EE0041';
+// }
+
+
+
 
 // <!-- class AQC_Qr_Code{
 
