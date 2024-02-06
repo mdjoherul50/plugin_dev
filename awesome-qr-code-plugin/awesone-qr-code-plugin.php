@@ -44,3 +44,5 @@ new FQC_QR_Code();
 // add_filter('the_content',array($this,'add_qr_code'))
 // }
 // } -->
+
+<?php eccho "test"; ?>
