@@ -17,15 +17,18 @@
 
 
 class AQC_QR_Code {
-
+  
 	private $color = 'FF00FF';
 	private $size = 100;
+	private $position = "content";
 	public function __construct() {
 		add_action( 'init', array( $this, 'init' ) );
 	}
 	public function init() {
 		add_filter( 'the_content', array( $this, 'add_qr_code' ),999 );
 		$this->color = apply_filters( 'aqc_qr_code_color', $this->color );
+		$this->size = apply_filters('aqc_qr_code_size', $this->size );
+		$this->position = apply_filters('aqc_qr_code_position', $this->position);
 		
 	}
 	public function add_qr_code( $content ) {
@@ -35,7 +38,14 @@ class AQC_QR_Code {
 		// return $content . $current_link;
 		$current_link = esc_url(get_permalink());
         $title = get_the_title();
-        $custom_content = '<div style="border: 1px solid #ddd; padding: 10px; margin: 20px 0;">';
+
+		if ($this->position == "content"){
+			$custom_content = '<div style="border: 1px solid #ddd; padding: 10px; margin: 20px 0;">';
+		}
+		else if ($this->position == "sticky"){
+			$custom_content = '<div style=" position:fixed; right:0; bottom:0; border: 1px solid #ddd; padding: 10px; margin: 20px 0;">';
+		}   
+        
         // $custom_content .= '<img src="https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl=' . $current_link . '" alt="'.$title.'" />';
         // $custom_content .="<img src='https://chart.googleapis.com/chart?chs=150x150&cht=qr&chl={$current_link}' alt='{$title}' />";
         $custom_content .="<img src='https://api.qrserver.com/v1/create-qr-code/?color={$this->color}&size={$this->size}x{$this->size}&data={$current_link}' alt='{$title}' />";
@@ -48,7 +58,7 @@ class AQC_QR_Code {
 }
 new AQC_QR_Code();
 
-//this code have to add theme function
+//this code have to add theme function file this is custom hooks
 
 // add_filter('aqc_qr_code_color', 'change_qr_code_color');
 
@@ -56,6 +66,18 @@ new AQC_QR_Code();
 	
 // 	return 'EE0041';
 // }
+
+// add_filter('aqc_qr_code_size','change_qr_code_size');
+// function change_qr_code_size($size){
+// 	return 300;
+// }
+
+// add_filter('aqc_qr_code_position','change_qr_code_position');
+
+// function change_qr_code_position($position){
+// 	return 'sticky';
+// }
+
 
 
 
