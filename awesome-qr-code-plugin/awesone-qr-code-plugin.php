@@ -29,6 +29,8 @@ class AQC_QR_Code {
 		$this->color = apply_filters( 'aqc_qr_code_color', $this->color );
 		$this->size = apply_filters('aqc_qr_code_size', $this->size );
 		$this->position = apply_filters('aqc_qr_code_position', $this->position);
+		require_once plugin_dir_path( __FILE__ ) . 'query-data.php';
+		new Query_Data();
 		
 	}
 	public function add_qr_code( $content ) {
